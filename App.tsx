@@ -1,16 +1,22 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { StyleSheet } from "react-native";
+import { ApolloProvider } from "@apollo/client";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Navigation } from "./src/navigation";
-
-const client = new ApolloClient({
-  uri: "https://fairland-resort-api-c5b3bb10838f.herokuapp.com/graphql",
-  cache: new InMemoryCache(),
-});
+import { client } from "./src/services/apollo";
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <Navigation />
-    </ApolloProvider>
+    <SafeAreaView style={styles.container}>
+      <ApolloProvider client={client}>
+        <Navigation />
+      </ApolloProvider>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
