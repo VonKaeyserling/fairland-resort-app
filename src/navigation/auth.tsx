@@ -8,7 +8,11 @@ export const { Navigator, Screen } = createStackNavigator();
 
 export const AuthNavigatior = () => {
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Screen name="Welcome" component={WelcomeScreen} />
       <Screen name="Login" component={LoginScreen} />
     </Navigator>
