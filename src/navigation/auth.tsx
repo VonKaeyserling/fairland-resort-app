@@ -13,8 +13,8 @@ export const AuthNavigatior = () => {
         headerShown: false,
       }}
     >
-      <Screen name="Welcome" component={WelcomeScreen} />
       <Screen name="Login" component={LoginScreen} />
+      <Screen name="Welcome" component={WelcomeScreen} />
     </Navigator>
   );
 };
