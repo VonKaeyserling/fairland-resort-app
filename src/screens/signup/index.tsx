@@ -53,7 +53,7 @@ export const SignUpScreen = () => {
               secureTextEntry
             />
 
-            <CustomButton mode="contained" text="Login" />
+            <CustomButton mode="contained" text="Cadastrar" />
 
             <Text
               style={[styles.subtitle, styles.account_link]}
