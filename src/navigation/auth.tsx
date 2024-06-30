@@ -6,6 +6,7 @@ import {
 
 import { LoginScreen } from "../screens/login";
 import { WelcomeScreen } from "../screens/welcome";
+import { SignUpScreen } from "../screens/signup";
 
 import { AuthNavigator } from "./types";
 
@@ -18,6 +19,7 @@ const screenOptions: StackNavigationOptions = {
 export const AuthNavigatior = () => {
   return (
     <Navigator screenOptions={screenOptions}>
+      <Screen name="SignUp" component={SignUpScreen} />
       <Screen name="Login" component={LoginScreen} />
       <Screen name="Welcome" component={WelcomeScreen} />
     </Navigator>
