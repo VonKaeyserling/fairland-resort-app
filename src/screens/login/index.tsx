@@ -1,6 +1,8 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { CustomButton } from "../../components/custom-button";
 import { CustomInput } from "../../components/custom-input";
@@ -8,14 +10,34 @@ import { CustomInput } from "../../components/custom-input";
 import Logo from "../../../assets/logo.svg";
 
 import { useAppNavigation } from "../../navigation/hooks";
+import { LoginSchema, TLoginSchema } from "./utils";
+import { LoginUserInput } from "../../services/graphql/graphql";
+import { authService } from "../../services";
 
 export const LoginScreen = () => {
   const navigation = useAppNavigation();
 
+  const [loading, setLoading] = React.useState(false);
+
   const gotoSignUp = () => navigation.navigate("Auth", { screen: "SignUp" });
 
-  const hadleLogin = () => {
-    // Login logic
+  const { control, handleSubmit, formState } = useForm<TLoginSchema>({
+    mode: "onChange",
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "customer@test.com",
+      password: "Daredevil95!",
+    },
+  });
+
+  const onSubmit = async (data: LoginUserInput) => {
+    setLoading(true);
+
+    const user = await authService.loginUser(data);
+
+    console.warn(user);
+
+    setLoading(false);
   };
 
   return (
@@ -37,19 +59,30 @@ export const LoginScreen = () => {
 
           <View style={styles.form_container}>
             <CustomInput
+              control={control}
               placeholderTextColor={"#fff"}
               textColor="white"
               underlineColor="transparent"
               label="Email"
+              name="email"
+              error={!!formState.errors?.email}
             />
             <CustomInput
+              control={control}
               textColor="white"
               underlineColor="transparent"
               label="Senha"
+              name="password"
+              error={!!formState.errors?.password}
               secureTextEntry
             />
 
-            <CustomButton onPress={hadleLogin} mode="contained" text="Login" />
+            <CustomButton
+              loading={loading}
+              onPress={handleSubmit(onSubmit)}
+              mode="contained"
+              text="Login"
+            />
 
             <Text
               style={[styles.subtitle, styles.account_link]}
