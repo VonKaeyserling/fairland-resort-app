@@ -3,9 +3,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { HomeScreen } from "../screens/home";
 
-export const { Navigator, Screen } = createStackNavigator();
+import { AppStackParamList } from "./types";
 
-export const MainNavigatior = () => {
+export const { Navigator, Screen } = createStackNavigator<AppStackParamList>();
+
+export const AppNavigatior = () => {
   return (
     <Navigator>
       <Screen name="Home" component={HomeScreen} />

@@ -7,7 +7,17 @@ import { CustomInput } from "../../components/custom-input";
 
 import Logo from "../../../assets/logo.svg";
 
+import { useAppNavigation } from "../../navigation/hooks";
+
 export const SignUpScreen = () => {
+  const navigation = useAppNavigation();
+
+  const gotoLogin = () => navigation.navigate("Auth", { screen: "Login" });
+
+  const hadleSignUp = () => {
+    // SignUp logic
+  };
+
   return (
     <ImageBackground
       style={styles.background}
@@ -53,7 +63,11 @@ export const SignUpScreen = () => {
               secureTextEntry
             />
 
-            <CustomButton mode="contained" text="Cadastrar" />
+            <CustomButton
+              mode="contained"
+              text="Cadastrar"
+              onPress={hadleSignUp}
+            />
 
             <Text
               style={[styles.subtitle, styles.account_link]}
@@ -61,6 +75,7 @@ export const SignUpScreen = () => {
             >
               Já tem uma conta?{" "}
               <Text
+                onPress={gotoLogin}
                 style={[styles.subtitle, styles.account_link_href]}
                 variant="bodyLarge"
               >

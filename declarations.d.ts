@@ -4,3 +4,13 @@ declare module "*.svg" {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare global {
+  import { RootStackParamList } from "./src/navigation/types";
+
+  type ValueOf<T> = T[keyof T];
+
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}

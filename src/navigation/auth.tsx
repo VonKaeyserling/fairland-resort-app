@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   StackNavigationOptions,
   createStackNavigator,
@@ -8,9 +9,9 @@ import { LoginScreen } from "../screens/login";
 import { WelcomeScreen } from "../screens/welcome";
 import { SignUpScreen } from "../screens/signup";
 
-import { AuthNavigator } from "./types";
+import { AuthStackParamList } from "./types";
 
-export const { Navigator, Screen } = createStackNavigator<AuthNavigator>();
+export const { Navigator, Screen } = createStackNavigator<AuthStackParamList>();
 
 const screenOptions: StackNavigationOptions = {
   headerShown: false,
@@ -18,7 +19,7 @@ const screenOptions: StackNavigationOptions = {
 
 export const AuthNavigatior = () => {
   return (
-    <Navigator screenOptions={screenOptions}>
+    <Navigator initialRouteName="Welcome" screenOptions={screenOptions}>
       <Screen name="SignUp" component={SignUpScreen} />
       <Screen name="Login" component={LoginScreen} />
       <Screen name="Welcome" component={WelcomeScreen} />

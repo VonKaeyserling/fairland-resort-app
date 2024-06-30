@@ -6,7 +6,15 @@ import { CustomButton } from "../../components/custom-button";
 
 import Logo from "../../../assets/logo.svg";
 
+import { useAppNavigation } from "../../navigation/hooks";
+import { AuthStackParamList } from "../../navigation/types";
+
 export const WelcomeScreen = () => {
+  const navigation = useAppNavigation();
+
+  const handleNavigation = (screen: keyof AuthStackParamList) => () =>
+    navigation.navigate("Auth", { screen });
+
   return (
     <ImageBackground
       style={styles.background}
@@ -24,9 +32,17 @@ export const WelcomeScreen = () => {
           </Text>
         </View>
 
-        <CustomButton mode="contained" text="Login" />
+        <CustomButton
+          mode="contained"
+          text="Login"
+          onPress={handleNavigation("Login")}
+        />
 
-        <CustomButton mode="text" text="Cadastrar" />
+        <CustomButton
+          mode="text"
+          text="Cadastrar"
+          onPress={handleNavigation("SignUp")}
+        />
       </View>
     </ImageBackground>
   );
