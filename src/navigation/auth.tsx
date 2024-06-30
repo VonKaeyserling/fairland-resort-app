@@ -1,18 +1,23 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  StackNavigationOptions,
+  createStackNavigator,
+} from "@react-navigation/stack";
 
 import { LoginScreen } from "../screens/login";
 import { WelcomeScreen } from "../screens/welcome";
 
-export const { Navigator, Screen } = createStackNavigator();
+import { AuthNavigator } from "./types";
+
+export const { Navigator, Screen } = createStackNavigator<AuthNavigator>();
+
+const screenOptions: StackNavigationOptions = {
+  headerShown: false,
+};
 
 export const AuthNavigatior = () => {
   return (
-    <Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Navigator screenOptions={screenOptions}>
       <Screen name="Login" component={LoginScreen} />
       <Screen name="Welcome" component={WelcomeScreen} />
     </Navigator>
